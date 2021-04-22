@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -37,5 +38,12 @@ public class GreetingService implements  IGreetingService
         List<Greeting> greetings = new ArrayList<>();
         greetingRepository.findAll().forEach(greeting -> greetings.add(greeting));
         return greetings;
+    }
+
+    @Override
+    public Optional<Greeting> editGreetingById(long id, String name) {
+        Optional<Greeting> particularGreeting = greetingRepository.findById(id);
+        particularGreeting.get().setContent(name);
+        return particularGreeting;
     }
 }

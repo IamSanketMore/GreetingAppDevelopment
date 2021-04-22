@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
@@ -17,11 +18,11 @@ public class GreetingController
 
     @Autowired
     private IGreetingService greetingService;
-
+    User user = new User();
 //--------------------For Save To Repository --------------------------
     @GetMapping(value = {"","/","/home"})
     public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-        User user = new User();
+
         user.setFirstName(name);
         return greetingService.addGreeting(user);
     }
@@ -33,6 +34,16 @@ public class GreetingController
     @GetMapping("/getAllGreetings")
     public List<Greeting> getAllGreeting() {
         return greetingService.getAllGreetings();
+    }
+
+    @PutMapping("/editGreeting/{id}")
+    public Optional<Greeting> editGreetingById(@PathVariable("id") long id, @RequestParam(value = "name") String name) {
+        return greetingService.editGreetingById(id, name);
+    }
+    @PostMapping("/post")
+    public Greeting getRepoGreeting(@RequestParam(value = "name", defaultValue = "World") String name) {
+        user.setFirstName(name);
+        return greetingService.addGreeting(user);
     }
 //--------------------------------------------------------------------------
 
