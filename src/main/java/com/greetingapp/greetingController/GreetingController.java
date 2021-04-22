@@ -45,6 +45,12 @@ public class GreetingController
         user.setFirstName(name);
         return greetingService.addGreeting(user);
     }
+
+    @DeleteMapping("/deleteGreeting/{id}")
+    public String deletePerson(@PathVariable("id") long id) {
+        greetingService.deleteGreeting(id);
+        return "Greeting Deleted Successfully";
+    }
 //--------------------------------------------------------------------------
 
     //--------------For Just Check Http methods----------------------------------
