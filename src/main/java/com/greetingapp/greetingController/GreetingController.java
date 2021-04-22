@@ -23,9 +23,15 @@ public class GreetingController
         user.setFirstName(name);
         return greetingService.addGreeting(user);
     }
+    @GetMapping("/getById/{id}")
+    public Greeting getGreetingById(@PathVariable(value = "id")long id)
+    {
+        return greetingService.getGreetingById(id);
+    }
     // curl localhost:8080/greeting
     @GetMapping("/greeting")
     public Greeting getGreeting() {
+
         return new Greeting(counter.incrementAndGet(), String.format(template, " "));
     }
     //curl -X GET "http://localhost:8080/greeting/param"
