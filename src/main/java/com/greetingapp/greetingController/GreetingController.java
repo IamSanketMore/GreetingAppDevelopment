@@ -5,6 +5,8 @@ import com.greetingapp.greetingModel.User;
 import com.greetingapp.greetingService.IGreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
@@ -16,7 +18,7 @@ public class GreetingController
     @Autowired
     private IGreetingService greetingService;
 
-
+//--------------------For Save To Repository --------------------------
     @GetMapping(value = {"","/","/home"})
     public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
         User user = new User();
@@ -28,6 +30,13 @@ public class GreetingController
     {
         return greetingService.getGreetingById(id);
     }
+    @GetMapping("/getAllGreetings")
+    public List<Greeting> getAllGreeting() {
+        return greetingService.getAllGreetings();
+    }
+//--------------------------------------------------------------------------
+
+    //--------------For Just Check Http methods----------------------------------
     // curl localhost:8080/greeting
     @GetMapping("/greeting")
     public Greeting getGreeting() {
