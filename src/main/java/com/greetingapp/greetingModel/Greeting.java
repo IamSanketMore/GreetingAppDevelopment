@@ -10,7 +10,7 @@ public class Greeting
 {
     @Id
     private final long id;
-    private final String content;
+    private String content;
 
     public Greeting()
     {
@@ -30,5 +30,9 @@ public class Greeting
 
     public String getContent() {
         return content;
+    }
+    public void setContent(String name)
+    {
+        this.content= name;
     }
 }
